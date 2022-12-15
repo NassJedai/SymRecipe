@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Symrecipe - mes ingrédients !{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Mes ingrédients </h1>
+
+        {% for ingredient in ingredients %}
+            <div>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">Numéro</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Date de création</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr class="table-warning">
+
+                        <td>{{ ingredient.id }}</td>
+                        <td>{{ ingredient.name }}</td>
+                        <td>{{ ingredient.price }} €</td>
+                        <td>{{ ingredient.createdAt |date('d/m/Y') }} </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+                <div class="navigation">
+                    {{ knp_pagination_render(ingredient) }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
