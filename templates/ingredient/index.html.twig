@@ -8,8 +8,22 @@
 
         {% if not ingredients.items is same as ([]) %}
 
+            {# read and display just one flash message type #}
+            {% for message in app.flashes('success') %}
+                <div class=" alert alert-success mt-4">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {% for message in app.flashes('danger') %}
+                <div class=" alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
         <h1>Mes ingrédients </h1>
 
+            <a href="{{ path('ingredient.new') }}" class="btn btn-primary mb-4">Créer un ingrédient</a>
             <div class="count">
                 <h4>il y'a {{ ingredients.getTotalItemCount }} ingrédients au total </h4>
             </div>

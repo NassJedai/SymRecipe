@@ -16,13 +16,14 @@ class IngredientController extends AbstractController
 {
 
 
-    /*
-     * This function display all ingredients
+
+    /**
+     * This controller display all ingredients
      * @param IngredientRepository $repository
      * @param PaginatorInterface $paginator
      * @param Request $request
      * @return Response
-     */
+     **/
     #[Route('/ingredient', name: 'ingredient.index', methods:['GET'])]
     public function index(IngredientRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
@@ -37,6 +38,15 @@ class IngredientController extends AbstractController
         ]);
     }
 
+
+
+
+    /**
+     * This controller show form whci create an ingredient
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
     #[Route ('/ingredient/nouveau', 'ingredient.new', methods: ['GET', 'POST'])]
      public function new(
          Request $request,
@@ -59,8 +69,7 @@ class IngredientController extends AbstractController
                  'Votre ingrédient a été créé avec succès !'
              );
 
-            // Problem with Route
-            //$this->redirectToRoute('ingredient.index');
+            return $this->redirectToRoute('ingredient.index');
 
          } else {
              $this->addFlash(
@@ -72,5 +81,19 @@ class IngredientController extends AbstractController
         return $this->render('ingredient/new.html.twig', [
             'form' => $form->createView()
         ]);
+     }
+
+
+
+
+
+    /**
+     * @param Request $request
+     * @return Response
+     */
+     #[Route('/ingredient/edition/{id}', 'ingredient.edit', methods: ['GET', 'POST'])]
+     public function edit(Request $request):Response
+     {
+        return $this->render('ingredient/edit.html.twig');
      }
 }
